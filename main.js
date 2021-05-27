@@ -12,6 +12,11 @@ const gallery = document.querySelector('.js-gallery'),
 
     overlay = document.querySelector('.lightbox__overlay');
 
+    const imagesSrc = [];
+    imageArray.forEach(el => {
+    imagesSrc.push(el.original);
+    });
+
 
 gallery.insertAdjacentHTML('afterbegin', createGallery(imageArray));
 
@@ -64,17 +69,17 @@ function onClickEscClose(e) {
 
 document.addEventListener('keydown', (e) => {
 
-    let newIndex = imageArray.indexOf(image.src);
+    let newIndex = imagesSrc.indexOf(image.src);
     if (e.key === 'ArrowLeft') {
         newIndex -= 1;
         if (newIndex === -1) {
-            newIndex = imageArray.length - 1;
+            newIndex = imagesSrc.length - 1;
         }
     } else if (e.key === 'ArrowRight') {
         newIndex += 1;
-        if (newIndex === imageArray.length) {
+        if (newIndex === imagesSrc.length) {
             newIndex = 0;
         }
     }
-    image.src = imageArray[newIndex];
+    image.src = imagesSrc[newIndex];
 });
